@@ -20,6 +20,12 @@ const AddBar = () => {
         setSelctedDate(date)
     }
 
+    const [label, setLabel] = useState<string | null>('')
+
+    const handleLabelChange = (input : string | null) => {
+        setLabel(input)
+    }
+
     const [type, setType] = useState('')
 
     const handleTypeChange = (e: React.ChangeEvent<{ value: unknown }>) => {
@@ -58,6 +64,14 @@ const AddBar = () => {
                     <Grid item>
                         <TextField 
                             label="Label"
+                            value={label}
+                            onChange={e => handleLabelChange(e.target.value)}
+                        />
+                    </Grid>
+
+                    <Grid item>
+                        <TextField 
+                            label="Amount (NZD)"
                         />
                     </Grid>
 

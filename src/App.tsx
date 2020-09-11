@@ -6,6 +6,7 @@ import AddBar from './components/AddBar/AddBar'
 import Account from './components/Account/Account'
 import UserInterface from './components/common/UserInterface'
 import './App.css';
+import Accounts from './components/Accounts/Accounts';
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
       <AddBar/>
       <BrowserRouter>
         <Switch>
-        <Route path="/" component={Account} />
+        <Route path="/" component={Accounts} />
         </Switch>
       </BrowserRouter>
     </div>
