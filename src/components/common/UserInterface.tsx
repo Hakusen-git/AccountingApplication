@@ -1,5 +1,5 @@
 interface UserInterface{
-    SearchInput: String
+    CustomerID: string
 }
 
 export default UserInterface

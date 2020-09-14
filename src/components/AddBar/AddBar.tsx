@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import DateFnsUtils from  '@date-io/date-fns'
 import Button from '@material-ui/core/Button'
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
+import { addAccount, PostAccount } from "../../api/Api"
 
 
 const AddBar = () => {
@@ -26,14 +27,30 @@ const AddBar = () => {
         setLabel(input)
     }
 
+    const [amount, setAmount] = useState<string>('')
+
+    const handleAmountChange = (input : string) => {
+        setAmount(input)
+    }
+
     const [type, setType] = useState('')
 
     const handleTypeChange = (e: React.ChangeEvent<{ value: unknown }>) => {
         setType(e.target.value as string)
     }
 
-    const handleSubmit = () => {
-        
+    const handleSubmit = async () => {
+        if(!type && !amount && !selectedDate && !label){
+            return;
+        }
+        const body : PostAccount = {
+            accountType:type,
+            accountAmount:parseInt(amount),
+            accountDate: selectedDate?.toString(),
+            accountLabel: label
+        }
+        console.log(body)
+        await addAccount(body)
     }
     
     return(
@@ -51,12 +68,11 @@ const AddBar = () => {
                                 label="type"
                             >
                                 <option aria-label="None" />
-                                <option value={"Asset"}>Assert</option>
+                                <option value={"Asset"}>Asset</option>
                                 <option value={"liability"}>Liability</option>
                                 <option value={"equity"}>Equity</option>
                                 <option value={"revenue"}>Revenue</option>
                                 <option value={"expense"}>Expense</option>
-
                             </Select>
                         </FormControl>
                     </Grid>
@@ -71,7 +87,9 @@ const AddBar = () => {
 
                     <Grid item>
                         <TextField 
+                            value={amount}
                             label="Amount (NZD)"
+                            onChange={e => handleAmountChange(e.target.value)}
                         />
                     </Grid>
 
