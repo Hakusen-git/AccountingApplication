@@ -1,3 +1,4 @@
+import { Paper } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'; 
 import { Doughnut } from 'react-chartjs-2';
 
@@ -8,14 +9,14 @@ export interface chartProps{
     liabilityAmount: number,
     expenseAmount: number,
     revenueAmount: number,
-    toggleLoading: () => void
+    toggleLoading: () => void,
+    customerId : string | null
 }
 
 export default function Chart(props: chartProps) {
     useEffect(() => {
         props.toggleLoading()
-        console.log('loaded')
-    }, [])
+    }, [props.customerId])
 
     const [chartData, setChartData] = useState({})
     const chart = () => {
@@ -23,7 +24,7 @@ export default function Chart(props: chartProps) {
             labels: ['Asset', 'Equity', 'Liability', 'Expense', 'Revenue'],
             datasets: [{
                 data:[props.assetAmount, props.equityAmount, props.liabilityAmount, props.expenseAmount, props.revenueAmount],
-                backgroundColor: ["rgba(255,0,0,0.4)","rgba(0,0,255,0.6)","rgba(255,255,0,0.6)","rgba(120,250,120,0.5)", "rgba(0,0,0,0.5)" ],
+                backgroundColor: ["rgba(255,0,0,0.4)","rgba(0,0,255,0.6)","rgba(255,255,0,0.6)","rgba(120,250,120,0.5)", "rgba(196,133,230,0.5)" ],
             }],
             
         })
@@ -35,7 +36,15 @@ export default function Chart(props: chartProps) {
 
 
     return(
-        <div className="chart">
+        <Paper
+            style={{
+                width:"100%",
+                display: 'flex',
+                flexDirection:'column',
+                justifyContent: 'center',
+            }}
+        >
+            <h1 style={{textAlign:'center'}}>Doughnut Stats</h1>
             <Doughnut
                 data={chartData}
                 height={100}
@@ -45,6 +54,6 @@ export default function Chart(props: chartProps) {
                     maintainAspectRatio: true
                 }}
             />
-        </div>
+        </Paper>
     )
 }

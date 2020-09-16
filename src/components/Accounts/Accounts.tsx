@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core'
+import { Grid, Paper, Table, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core'
 import React, {useEffect, useState} from 'react'
 import { getAccounts } from '../../api/Api'
 import Account from '../Account/Account'
@@ -68,9 +68,8 @@ export default function Accounts(props: IAccounts) {
             }
 
             x.push(
-                <Grid key={'account_' + i} item>
-                    <Account accountID={el.accountID} accountAmount={el.accountAmount} accountDate={el.accountDate} accountLabel={el.accountLabel} accountType={el.accountType} toggleDelete={() => props.toggleDelete()} />
-                </Grid>
+                <Account accountID={el.accountID} accountAmount={el.accountAmount} accountDate={el.accountDate} accountLabel={el.accountLabel} accountType={el.accountType} toggleDelete={() => props.toggleDelete()} />
+                
             )
         })
 
@@ -83,11 +82,23 @@ export default function Accounts(props: IAccounts) {
     }
 
     return(
-        <div>
-            <Grid container direction="column" alignItems="center" justify="space-around">
-                {x}
-            </Grid>
-        </div>
+        <Paper>
+            <TableContainer >
+                <Table stickyHeader>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Date</TableCell>
+                            <TableCell>Label</TableCell>
+                            <TableCell>Type</TableCell>
+                            <TableCell>Amount</TableCell>
+                            <TableCell></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    {x}
+                </Table>
+            </TableContainer>
+        </Paper>
+        
     )
 
 

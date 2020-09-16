@@ -61,15 +61,13 @@ const User = (props: IUserProps) => {
                 alignContent: 'center',
                 textAlign: 'center'
             }}>
-                <img src={img} alt={userName}/>
+                <img style={{borderRadius:'50px'}} src={img} alt={userName}/>
                 <h2 style={{color:'#008C76FF'}}>Welcome!</h2>
                 <p style={{color:'#008C76FF'}}>{userName}</p>
-                
-
             </div>
         )
     } else{
-        fbContent = (<FacebookLogin 
+        fbContent = (<FacebookLogin
         appId="2802992179976775"
         autoLoad={true}
         fields="name,email,picture"

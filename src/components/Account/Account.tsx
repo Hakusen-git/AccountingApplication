@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button'
-import { Grid } from '@material-ui/core'
+import { TableBody, TableCell, TableRow } from '@material-ui/core'
 import { deleteAccount } from '../../api/Api'
 
 interface IState{
@@ -21,15 +21,20 @@ export default function Account(props: IState) {
     }
 
     return(
-        <div style={{paddingTop:'50px', display:'grid', gridAutoFlow:'column', gridTemplateColumns:'repeat(5, 1fr)'}}>
-                <h3>{props.accountType}</h3>
-                <h3>{props.accountLabel}</h3>
-                <h3>${props.accountAmount}</h3>
-                <h3>{props.accountDate}</h3>
-                <Button style={{flex:'1'}} onClick={handleDelete} variant="contained" color="secondary" size="small">
-                    delete
-                </Button>
-         
-        </div>
+        <TableBody>
+            <TableRow hover>
+                <TableCell>
+                    {props.accountDate}
+                </TableCell>
+                <TableCell>{props.accountLabel}</TableCell>
+                <TableCell>{props.accountType}</TableCell>
+                <TableCell>{props.accountAmount}</TableCell>
+                <TableCell>
+                    <Button onClick={handleDelete} variant="contained" color="secondary">
+                        Delete
+                    </Button>    
+                </TableCell>
+            </TableRow>
+        </TableBody>
     )
 }

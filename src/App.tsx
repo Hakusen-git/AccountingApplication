@@ -59,7 +59,7 @@ function App() {
         <Route exact path="/" component={Homepage} />
         <Route path="/apps" render={props => 
           <div>
-            <TopBar />
+            <TopBar customerId={customerid} assetAmount={asset} equityAmount={equity} expenseAmount={expense} liabilityAmount={liability} revenueAmount={revenue} toggleLoading={() => toggleIsLoading()}/>
             <User setCustomerID={(a: string | null) => setCustomerID(a)} id={customerid} toggleAccount={() => toggleIsLoading()}/>
             <AddBar id={customerid} toggle={() => toggleIsLoading()}/>
             <Accounts {...props} 
@@ -71,12 +71,6 @@ function App() {
               id={customerid} 
               refresh={isLoading}  
               toggleDelete={() => toggleIsLoading()} />
-          </div>} />
-          <Route path="/charts" render={props => 
-          <div>
-            <TopBar />
-            <User setCustomerID={(a: string | null) => setCustomerID(a)} id={customerid} toggleAccount={() => toggleIsLoading()}/>
-            <Chart assetAmount={asset} equityAmount={equity} expenseAmount={expense} liabilityAmount={liability} revenueAmount={revenue} toggleLoading={() => toggleIsLoading()}/>
           </div>} />
 
         </Switch>
