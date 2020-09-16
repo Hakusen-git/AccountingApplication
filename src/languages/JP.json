@@ -8,7 +8,7 @@
     "Date" : "日付",
     "Label" : "ラベル",
     "Type" : "タイプ",
-    "Amount" : "金額",
+    "Amount" : "金額 (NZD)",
     "Chart":"チャート",
     "Doughnut":"ドーナツ統計"
 }

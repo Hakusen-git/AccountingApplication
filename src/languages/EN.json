@@ -8,7 +8,7 @@
     "Date" : "Date",
     "Label" : "Label",
     "Type" : "Type",
-    "Amount" : "Amount",
+    "Amount" : "Amount (NZD)",
     "Chart":"Chart",
     "Doughnut": "Doughnut Stats"
 }
