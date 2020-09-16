@@ -1,5 +1,5 @@
 
-const API_BASE_URL = process.env.NODE_ENV === "development" ? "https://localhost:5001/api/" : "https://accounting-app.azurewebsites.net/api";
+const API_BASE_URL = process.env.NODE_ENV === "development" ? "https://localhost:5001/api/" : "https://accounting-app.azurewebsites.net/api/";
 
 const CUSTOMER_API_URL = API_BASE_URL + "Customer/";
 
