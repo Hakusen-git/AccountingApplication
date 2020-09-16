@@ -2,8 +2,7 @@ trigger:
 - master
 
 variables:
-  rootDir: ''
-  buildDir: '$(rootDir)/build'
+  buildDir: 'build'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -15,10 +14,8 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    cd $(rootDir)
     npm install
     npm run build
-    cd ..
   displayName: 'npm install and build'
 
 - task: ArchiveFiles@2
