@@ -8,8 +8,9 @@ const ACCOUNT_API_URL = API_BASE_URL + "Account/";
 export const getAccounts = async (id : string | null) => {
     const response = await fetch(CUSTOMER_API_URL + "GetAccounts?id=" + id, {
         headers: {
-            Accept: "application/json",
-        }
+            Accept: "*/*",
+            "Content-Type": "application/json"
+        },
     })
         .then((res) => res.json()).then((res) => res.accounts)
         .catch(() => console.log("didn't find the id"))
@@ -32,7 +33,8 @@ export const getCustomers = async () => {
 export const deleteAccount = async (id : string | null) => {
     const response = await fetch(ACCOUNT_API_URL + "DeleteAccount?id=" + id, {
         headers: {
-            Accept: "application/json",
+            Accept: "*/*",
+            "Content-Type": "application/json"
         },
         method: "DELETE"
     })
@@ -73,7 +75,8 @@ export const addCustomer = async ({customerID: id, customerLabel: label} : PostC
         await fetch(CUSTOMER_API_URL + "AddCustomer?id=" + id, {
             body,
             headers: {
-                Accept: "application/json"
+                Accept: "*/*",
+                "Content-Type": "application/json"
             },
             method: "POST",
         })
