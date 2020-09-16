@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import i18t from './i18t';
 import { BrowserRouter, Switch, Route} from 'react-router-dom'
 import AddBar from './components/AddBar/AddBar'
 import Accounts from './components/Accounts/Accounts'
@@ -7,7 +7,7 @@ import './App.css';
 import User from './components/User/User';
 import Homepage from './components/Homepage/Homepage';
 import TopBar from './components/TopBar/TopBar';
-import Chart from './components/Chart/Chart';
+import Header from './components/Header/Header';
 
 
 
@@ -49,12 +49,20 @@ function App() {
   } 
 
 
+  const handleEng = () => {
+    i18t.changeLanguage('en')
+  }
+
+  const handleJpn = () => {
+    i18t.changeLanguage('jp')
+  }
+
 
   return (
     <div className="App" style={{height: '100vh'}}>
       
       <BrowserRouter>
-      
+        <Header handleEng={()=>handleEng()} handleJpn={() => handleJpn()}/>
         <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/apps" render={props => 

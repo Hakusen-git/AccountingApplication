@@ -1,0 +1,14 @@
+{
+    "Title":"Welcome To The Accounting App",
+    "Start":"Start",
+    "Welcome":"Welcome!",
+    "AddingEntry":"Add a new entry",
+    "Add":"Add",
+    "Delete":"Delete",
+    "Date" : "Date",
+    "Label" : "Label",
+    "Type" : "Type",
+    "Amount" : "Amount",
+    "Chart":"Chart",
+    "Doughnut": "Doughnut Stats"
+}

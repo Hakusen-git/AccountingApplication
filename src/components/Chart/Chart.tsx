@@ -1,6 +1,7 @@
 import { Paper } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'; 
 import { Doughnut } from 'react-chartjs-2';
+import { useTranslation } from 'react-i18next';
 
 
 export interface chartProps{
@@ -14,6 +15,9 @@ export interface chartProps{
 }
 
 export default function Chart(props: chartProps) {
+    const {t}= useTranslation();
+
+
     useEffect(() => {
         props.toggleLoading()
     }, [props.customerId])
@@ -44,7 +48,7 @@ export default function Chart(props: chartProps) {
                 justifyContent: 'center',
             }}
         >
-            <h1 style={{textAlign:'center'}}>Doughnut Stats</h1>
+            <h1 style={{textAlign:'center'}}>{t("Doughnut")}</h1>
             <Doughnut
                 data={chartData}
                 height={100}

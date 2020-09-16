@@ -3,6 +3,7 @@ import { Grid} from '@material-ui/core'
 import React, { useState } from 'react'
 import { addCustomer, PostCustomer } from '../../api/Api';
 import FacebookLogin from 'react-facebook-login';
+import { useTranslation } from 'react-i18next';
 
 
 interface IUserProps{
@@ -14,9 +15,10 @@ interface IUserProps{
 
 const User = (props: IUserProps) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [t] = useTranslation();
 
-    const [userName, setUserName] = useState<string>('')
-    const [img, setImg] = useState<string>('')
+    const [userName, setUserName] = useState<string>('');
+    const [img, setImg] = useState<string>('');
 
     const handleUserName = (input : string) => {
         setUserName(input)
@@ -62,7 +64,7 @@ const User = (props: IUserProps) => {
                 textAlign: 'center'
             }}>
                 <img style={{borderRadius:'50px'}} src={img} alt={userName}/>
-                <h2 style={{color:'#008C76FF'}}>Welcome!</h2>
+                <h2 style={{color:'#008C76FF'}}>{t("Welcome")}</h2>
                 <p style={{color:'#008C76FF'}}>{userName}</p>
             </div>
         )

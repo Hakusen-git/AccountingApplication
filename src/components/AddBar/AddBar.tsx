@@ -8,6 +8,7 @@ import DateFnsUtils from  '@date-io/date-fns'
 import Button from '@material-ui/core/Button'
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
 import { addAccount, PostAccount } from "../../api/Api"
+import { useTranslation } from "react-i18next"
 
 interface id{
     id: string | null
@@ -16,6 +17,7 @@ interface id{
 
 const AddBar = (props: id) => {
 
+    const {t}= useTranslation();
 
     const [error, setError] = useState(false)
 
@@ -48,6 +50,8 @@ const AddBar = (props: id) => {
     const handleTypeChange = (e: React.ChangeEvent<{ value: unknown }>) => {
         setType(e.target.value as string)
     }
+    
+
 
     const handleSubmit = async () => {
         if(type==='' || !amount || !selectedDate || label===''){
@@ -68,17 +72,17 @@ const AddBar = (props: id) => {
     
     return(
         <div style={{paddingTop: 20, border: '3px solid #ff8b3d', marginTop: '20px'}}>
-            <h3 style={{margin: 'auto', textAlign: 'center'}}>Add a new entry</h3>
+            <h3 style={{margin: 'auto', textAlign: 'center'}}>{t("AddingEntry")}</h3>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container direction="row" alignItems="center" justify="space-around">
                     <Grid item>
                         <FormControl style={{minWidth: 120}}>
-                            <InputLabel>Account</InputLabel>
+                            <InputLabel>{t("Type")}</InputLabel>
                             <Select 
                                 native
                                 value={type}
                                 onChange={handleTypeChange}
-                                label="type"
+                                label={t("Type")}
                                 error={error}
                             >
                                 <option value={""} aria-label="None" />
@@ -93,7 +97,7 @@ const AddBar = (props: id) => {
 
                     <Grid item>
                         <TextField 
-                            label="Label"
+                            label={t("Label")}
                             value={label}
                             onChange={e => handleLabelChange(e.target.value)}
                             error={error}
@@ -104,7 +108,7 @@ const AddBar = (props: id) => {
                     <Grid item>
                         <TextField 
                             value={amount}
-                            label="Amount (NZD)"
+                            label={t("Amount")}
                             onChange={e => handleAmountChange(e.target.value)}
                             error={error}
                             helperText={!error ? "" : "Please don't leave it empty :)"}
@@ -114,7 +118,7 @@ const AddBar = (props: id) => {
                     <Grid item>
                         <KeyboardDatePicker
                             margin="normal"
-                            label="Date"
+                            label={t("Date")}
                             format="dd/MM/yyyy"
                             value={selectedDate}
                             onChange={handleDateChange}
@@ -126,7 +130,7 @@ const AddBar = (props: id) => {
 
                     <Grid item>
                         <Button variant="contained" color="primary" size="large" onClick={handleSubmit}>
-                            Add
+                            {t("Add")}
                         </Button>
                     </Grid>
                 </Grid>

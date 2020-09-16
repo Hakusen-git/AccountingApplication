@@ -1,7 +1,9 @@
 import { Button, Modal } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useTransition } from "react-spring";
 import Chart from "../Chart/Chart";
 import './TopBar.css'
 
@@ -17,7 +19,7 @@ interface chartProps{
 
 export default function TopBar(props: chartProps) {
     const [modalOpen, setModalOpen] = useState(false);
-
+    const [t] = useTranslation();
     const handleOpen = () => {
         setModalOpen(true);
     }
@@ -29,7 +31,7 @@ export default function TopBar(props: chartProps) {
     return(
         <div className="topBar">
                 <Button variant="contained" color="primary" onClick={handleOpen}>
-                    Chart
+                    {t("Chart")}
                 </Button>
                 <Modal
                     open={modalOpen}

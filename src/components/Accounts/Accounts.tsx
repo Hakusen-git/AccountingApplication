@@ -1,5 +1,6 @@
 import { Grid, Paper, Table, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core'
 import React, {useEffect, useState} from 'react'
+import { useTranslation } from 'react-i18next'
 import { getAccounts } from '../../api/Api'
 import Account from '../Account/Account'
 
@@ -25,7 +26,7 @@ interface IAccounts{
 
 export default function Accounts(props: IAccounts) {
     const [Accounts, setAccounts] = useState<IAccountStates[]>([{accountType: '', accountAmount: 0, accountDate: '', accountLabel: '', accountID: ''}])
-    
+    const {t}= useTranslation();
     useEffect(() => {
         const makeArrayRequest = async () => {
             let temp = await getAccounts(props.id)
@@ -87,10 +88,10 @@ export default function Accounts(props: IAccounts) {
                 <Table stickyHeader>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Date</TableCell>
-                            <TableCell>Label</TableCell>
-                            <TableCell>Type</TableCell>
-                            <TableCell>Amount</TableCell>
+                            <TableCell>{t("Date")}</TableCell>
+                            <TableCell>{t("Label")}</TableCell>
+                            <TableCell>{t("Type")}</TableCell>
+                            <TableCell>{t("Amount")}</TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
