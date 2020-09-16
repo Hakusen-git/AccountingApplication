@@ -13,6 +13,9 @@ export default function TopBar() {
                 <Button component={Link} to="/apps" variant="contained" color="primary">
                     App Page
                 </Button>
+                <Button component={Link} to="/charts" variant="contained" color="primary">
+                    Chart
+                </Button>
             </div>
     )
 }

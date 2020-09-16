@@ -1,21 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 import { BrowserRouter, Switch, Route} from 'react-router-dom'
-import Header from './components/Header/Header'
 import AddBar from './components/AddBar/AddBar'
 import Accounts from './components/Accounts/Accounts'
 import './App.css';
 import User from './components/User/User';
 import Homepage from './components/Homepage/Homepage';
 import TopBar from './components/TopBar/TopBar';
-
-interface IAccountStates{
-  accountType: string,
-  accountLabel: string,
-  accountAmount: number,
-  accountDate : string,
-  accountID : string
-}
+import Chart from './components/Chart/Chart';
 
 
 
@@ -30,8 +22,31 @@ function App() {
   const [isLoading, setIsLoading] = useState(false)
 
   const toggleIsLoading = async () => {
-    await setIsLoading(!isLoading)
+    setIsLoading(!isLoading)
   }
+
+  const [asset, setAsset] = useState<number>(0)
+  const [liability, setLiability] = useState<number>(0)
+  const [equity, setEquity] = useState<number>(0)
+  const [revenue, setRevenue] = useState<number>(0)
+  const [expense, setExpense] = useState<number>(0)
+
+  const handleAsset = async (input:number) =>{
+    setAsset(input)
+    console.log(input)
+  } 
+  const handleLiability = async (input:number) =>{
+    setLiability(input)
+  } 
+  const handleEquity = async (input:number) =>{
+    setEquity(input)
+  } 
+  const handleRevenue = async (input:number) =>{
+    setRevenue(input)
+  } 
+  const handleExpense = async (input:number) =>{
+    setExpense(input)
+  } 
 
 
 
@@ -45,11 +60,25 @@ function App() {
         <Route path="/apps" render={props => 
           <div>
             <TopBar />
-            <Header />
             <User setCustomerID={(a: string | null) => setCustomerID(a)} id={customerid} toggleAccount={() => toggleIsLoading()}/>
             <AddBar id={customerid} toggle={() => toggleIsLoading()}/>
-            <Accounts {...props} id={customerid} refresh={isLoading} toggleDelete={() => toggleIsLoading()} />
+            <Accounts {...props} 
+              handleAsset={(a: number) => handleAsset(a)} 
+              handleEquity={(a: number) => handleEquity(a)}
+              handleExpense={(a: number) => handleExpense(a)}
+              handleLiability={(a: number) => handleLiability(a)}
+              handleRevenue={(a: number) => handleRevenue(a)}
+              id={customerid} 
+              refresh={isLoading}  
+              toggleDelete={() => toggleIsLoading()} />
           </div>} />
+          <Route path="/charts" render={props => 
+          <div>
+            <TopBar />
+            <User setCustomerID={(a: string | null) => setCustomerID(a)} id={customerid} toggleAccount={() => toggleIsLoading()}/>
+            <Chart assetAmount={asset} equityAmount={equity} expenseAmount={expense} liabilityAmount={liability} revenueAmount={revenue} toggleLoading={() => toggleIsLoading()}/>
+          </div>} />
+
         </Switch>
       </BrowserRouter>
     </div>

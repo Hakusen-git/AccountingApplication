@@ -16,6 +16,11 @@ interface IAccounts{
     id: string | null
     refresh: Boolean
     toggleDelete: () => void
+    handleAsset: (input:number) => void
+    handleLiability: (input:number) => void
+    handleEquity: (input:number) => void
+    handleRevenue: (input:number) => void
+    handleExpense: (input:number) => void
 }
 
 export default function Accounts(props: IAccounts) {
@@ -27,23 +32,54 @@ export default function Accounts(props: IAccounts) {
             setAccounts(temp)
         }
         makeArrayRequest();
-        console.log(props.id)
     }, [props.id, props.refresh])
 
     
     var x: JSX.Element[] = []
 
     if(Accounts){
+        let assetAmount = 0
+        let liabilityAmount = 0
+        let equityAmount = 0
+        let revenueAmount = 0
+        let expenseAmount = 0
+
         Accounts.forEach((el: IAccountStates, i: number) => {
             if(!el){
                 return;
             }
+
+            switch(el.accountType){
+                case "Asset":
+                    assetAmount += el.accountAmount
+                    break;
+                case "Liability":
+                    liabilityAmount += el.accountAmount
+                    break;
+                case "Equity":
+                    equityAmount += el.accountAmount
+                    break;
+                case "Revenue":
+                    revenueAmount += el.accountAmount
+                    break;
+                case "Expense":
+                    expenseAmount += el.accountAmount
+                    break;
+            }
+
             x.push(
                 <Grid key={'account_' + i} item>
                     <Account accountID={el.accountID} accountAmount={el.accountAmount} accountDate={el.accountDate} accountLabel={el.accountLabel} accountType={el.accountType} toggleDelete={() => props.toggleDelete()} />
                 </Grid>
             )
         })
+
+        props.handleAsset(assetAmount)
+        props.handleEquity(equityAmount)
+        props.handleExpense(expenseAmount)
+        props.handleRevenue(revenueAmount)
+        props.handleLiability(liabilityAmount)
+
     }
 
     return(

@@ -11,11 +11,11 @@ export default function Homepage() {
         <div className = "container">
             <div className="main">
             <h1 className="title">Welcome to The Accounting App</h1>
-            <button className="startBtn">
+            <Button variant="contained" color="secondary" size="large">
                 <Link to="/apps">
                 START
                 </Link>
-            </button>
+            </Button>
             </div>
         </div>
     )

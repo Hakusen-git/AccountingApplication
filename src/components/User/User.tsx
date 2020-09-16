@@ -1,6 +1,6 @@
 
-import { Backdrop, Button, Fade, FormControl, Grid, InputLabel, Modal, Select } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import { Grid} from '@material-ui/core'
+import React, { useState } from 'react'
 import { addCustomer, PostCustomer } from '../../api/Api';
 import FacebookLogin from 'react-facebook-login';
 
@@ -16,9 +16,14 @@ const User = (props: IUserProps) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [userName, setUserName] = useState<string>('')
+    const [img, setImg] = useState<string>('')
 
     const handleUserName = (input : string) => {
         setUserName(input)
+    }
+
+    const handleImg = (input : string) => {
+        setImg(input)
     }
 
     const handleLoggedIn = () => {
@@ -41,14 +46,25 @@ const User = (props: IUserProps) => {
         props.toggleAccount()
         handleLoggedIn()
         handleUserName(response.name)
+        handleImg(response.picture.data.url)
     }
 
     let fbContent;
 
     if(isLoggedIn){
         fbContent = (
-            <div>
-                <h1>Welcome Back {userName}</h1>
+            <div style={{
+                width: '400px',
+                margin: 'auto',
+                background: '#FC5185',
+                padding: '20px',
+                alignContent: 'center',
+                textAlign: 'center'
+            }}>
+                <img src={img} alt={userName}/>
+                <h2 style={{color:'#008C76FF'}}>Welcome!</h2>
+                <p style={{color:'#008C76FF'}}>{userName}</p>
+                
 
             </div>
         )
