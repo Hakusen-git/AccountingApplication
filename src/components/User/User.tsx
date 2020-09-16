@@ -1,68 +1,75 @@
-import { FormControl, Grid, InputLabel, Select } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
-import { getCustomers } from '../../api/Api';
 
-interface IUser{
-    customerID : string | undefined,
-    customerLabel: string | null
-}
+import { Backdrop, Button, Fade, FormControl, Grid, InputLabel, Modal, Select } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
+import { addCustomer, PostCustomer } from '../../api/Api';
+import FacebookLogin from 'react-facebook-login';
+
 
 interface IUserProps{
     setCustomerID: (a: string | null) => void
+    id: string | null
+    toggleAccount: () => void
 }
 
 
 const User = (props: IUserProps) => {
-    const [user, setUser] = useState<String>('');
-    const [userJson, setUserJson] = useState<IUser[]>([{customerID: '', customerLabel: ''}])
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    useEffect(() => {
-        const makeRequest = async () => {
-            setUserJson(await getCustomers())
+    const [userName, setUserName] = useState<string>('')
+
+    const handleUserName = (input : string) => {
+        setUserName(input)
+    }
+
+    const handleLoggedIn = () => {
+        setIsLoggedIn(!isLoggedIn);
+    }
+
+    const componentClicked = () => console.log('clicked');
+
+    const responseFacebook = (response: any) => {
+        console.log(response)
+        props.setCustomerID(response.id as string)
+        const body:PostCustomer = {
+            customerID : response.id as string,
+            customerLabel: response.email as string
         }
-        makeRequest()
-        setInterval(makeRequest, 100000)
-    }, [])
-
-    var Users:JSX.Element[] = []
-    
-    if(userJson){
-        userJson.forEach((el:IUser, i:number) => {
-            if(!el){
-                return;
-            }
-            Users.push(
-                <option id={'user_'+i}  value={el.customerID}>{el.customerLabel}</option>
-            )
-        })
+        const addRequest = async () => {
+            await addCustomer(body)
+        }
+        addRequest()
+        props.toggleAccount()
+        handleLoggedIn()
+        handleUserName(response.name)
     }
 
-    const handleUserChange = (e: React.ChangeEvent<{ value: unknown }>) => {
-        setUser(e.target.value as string)
-        props.setCustomerID(e.target.value as string)
+    let fbContent;
+
+    if(isLoggedIn){
+        fbContent = (
+            <div>
+                <h1>Welcome Back {userName}</h1>
+
+            </div>
+        )
+    } else{
+        fbContent = (<FacebookLogin 
+        appId="2802992179976775"
+        autoLoad={true}
+        fields="name,email,picture"
+        onClick={componentClicked}
+        callback={responseFacebook}
+        />)
     }
 
-    return(
+    return (
         <div>
-            <Grid container direction="row" alignItems="center" justify="space-around">
-                <Grid item>
-                <FormControl style={{minWidth: 120}}>
-                            <InputLabel>User</InputLabel>
-                            <Select 
-                                native
-                                value={user}
-                                onChange={handleUserChange}
-                                label="user"
-                            >
-                                <option aria-label="None" />
-                                {Users}
-
-                            </Select>
-                        </FormControl>
-                </Grid>
+            <Grid container direction="row" alignItems="center" justify="space-evenly" style={{paddingTop:'20px'}}>
+            {fbContent}
             </Grid>
         </div>
     )
+    
 }
 
 export default User

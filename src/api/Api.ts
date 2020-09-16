@@ -46,13 +46,14 @@ export interface PostAccount{
     accountLabel: string | null,
     accountAmount: number | null,
     accountDate : string | undefined,
+    customerID : string | null
 }
 
 export const addAccount = async ({accountType:type, accountLabel: label,
     accountAmount: amount,
-    accountDate : date} : PostAccount) => {
-        const body = JSON.stringify({ accountType:type, accountLabel:label, accountAmount: amount, accountDate: date })
-        await fetch(ACCOUNT_API_URL + "AddAccount?id=" + "4", {
+    accountDate : date, customerID : id} : PostAccount) => {
+        const body = JSON.stringify({ accountType:type, accountLabel:label, accountAmount: amount, accountDate: date, customerID : id })
+        await fetch(ACCOUNT_API_URL + "AddAccount?id=" + id, {
             body,
             headers: {
                 Accept: "*/*",
@@ -61,3 +62,21 @@ export const addAccount = async ({accountType:type, accountLabel: label,
             method: "POST",
         })
 }
+
+export interface PostCustomer{
+    customerID : string |null,
+    customerLabel: string | null,
+}
+
+export const addCustomer = async ({customerID: id, customerLabel: label} : PostCustomer) => {
+        const body = JSON.stringify({ CustomerID : id, customerLabel: label })
+        await fetch(CUSTOMER_API_URL + "AddCustomer?id=" + id, {
+            body,
+            headers: {
+                Accept: "application/json"
+            },
+            method: "POST",
+        })
+}
+
+

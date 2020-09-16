@@ -1,0 +1,53 @@
+.container{
+    height: 100%;
+    width: 100%;
+}
+
+
+
+.btn{
+    background-color: #FAA094FF;
+    margin: 0;
+    border: 1px;
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+.btn:visited{
+    text-decoration: none;
+}
+
+.btn:hover{
+    background-color: white;
+    cursor: pointer;
+
+}
+
+.main{
+    background-color: #9ED9CCFF;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.title{
+    color: #FFDDE2FF;
+    margin: 0 auto;
+    font-size: 100px;
+    padding-top: 30vh;
+}
+
+.startBtn{
+    margin-top: 20px;
+    background-color: #FFDDE2FF;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 30px;
+    transition: ease 0.25s;
+    text-decoration: none;
+}
+
+.startBtn:hover{
+    background-color: white;
+    cursor: pointer;
+}

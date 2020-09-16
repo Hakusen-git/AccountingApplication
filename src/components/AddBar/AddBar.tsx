@@ -1,5 +1,4 @@
 import React, {useState} from "react"
-import UserInterface from "../common/UserInterface"
 import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
@@ -10,8 +9,19 @@ import Button from '@material-ui/core/Button'
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
 import { addAccount, PostAccount } from "../../api/Api"
 
+interface id{
+    id: string | null
+    toggle: () => void
+}
 
-const AddBar = () => {
+const AddBar = (props: id) => {
+
+
+    const [error, setError] = useState(false)
+
+    const toggleError = () => {
+        setError(!error)
+    }
     
     const [selectedDate, setSelctedDate] = useState<Date | null> (
         new Date (),
@@ -40,17 +50,20 @@ const AddBar = () => {
     }
 
     const handleSubmit = async () => {
-        if(!type && !amount && !selectedDate && !label){
+        if(type==='' || !amount || !selectedDate || label===''){
+            toggleError()
             return;
         }
         const body : PostAccount = {
             accountType:type,
             accountAmount:parseInt(amount),
-            accountDate: selectedDate?.toString(),
-            accountLabel: label
+            accountDate: selectedDate?.toDateString(),
+            accountLabel: label,
+            customerID : props.id
         }
-        console.log(body)
         await addAccount(body)
+        props.toggle()
+        
     }
     
     return(
@@ -66,13 +79,14 @@ const AddBar = () => {
                                 value={type}
                                 onChange={handleTypeChange}
                                 label="type"
+                                error={error}
                             >
-                                <option aria-label="None" />
+                                <option value={""} aria-label="None" />
                                 <option value={"Asset"}>Asset</option>
-                                <option value={"liability"}>Liability</option>
-                                <option value={"equity"}>Equity</option>
-                                <option value={"revenue"}>Revenue</option>
-                                <option value={"expense"}>Expense</option>
+                                <option value={"Liability"}>Liability</option>
+                                <option value={"Equity"}>Equity</option>
+                                <option value={"Revenue"}>Revenue</option>
+                                <option value={"Expense"}>Expense</option>
                             </Select>
                         </FormControl>
                     </Grid>
@@ -82,6 +96,8 @@ const AddBar = () => {
                             label="Label"
                             value={label}
                             onChange={e => handleLabelChange(e.target.value)}
+                            error={error}
+                            helperText={!error ? "" : "Please don't leave it empty :)"}
                         />
                     </Grid>
 
@@ -90,6 +106,8 @@ const AddBar = () => {
                             value={amount}
                             label="Amount (NZD)"
                             onChange={e => handleAmountChange(e.target.value)}
+                            error={error}
+                            helperText={!error ? "" : "Please don't leave it empty :)"}
                         />
                     </Grid>
 
