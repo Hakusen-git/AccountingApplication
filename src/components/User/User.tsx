@@ -68,7 +68,7 @@ const User = (props: IUserProps) => {
         )
     } else{
         fbContent = (<FacebookLogin
-        appId="2802992179976775"
+        appId="740211256526028"
         autoLoad={true}
         fields="name,email,picture"
         onClick={componentClicked}
