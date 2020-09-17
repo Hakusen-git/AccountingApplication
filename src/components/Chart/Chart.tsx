@@ -20,7 +20,7 @@ export default function Chart(props: chartProps) {
 
     useEffect(() => {
         props.toggleLoading()
-    }, [props.customerId])
+    }, [])
 
     const [chartData, setChartData] = useState({})
     const chart = () => {
@@ -36,7 +36,7 @@ export default function Chart(props: chartProps) {
 
     useEffect(() => {
         chart()
-    }, [props.assetAmount])
+    }, [])
 
 
     return(
