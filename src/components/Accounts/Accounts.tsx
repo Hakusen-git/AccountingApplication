@@ -84,7 +84,7 @@ export default function Accounts(props: IAccounts) {
 
     return(
         <Paper>
-            <TableContainer style={{maxHeight:'51vh'}}>
+            <TableContainer style={{maxHeight:'50vh'}}>
                 <Table stickyHeader>
                     <TableHead>
                         <TableRow>
