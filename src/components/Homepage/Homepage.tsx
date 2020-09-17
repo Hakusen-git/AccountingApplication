@@ -14,10 +14,8 @@ export default function Homepage() {
             <div className="main">
             <img style={{width: '250px', paddingTop: '5vh'}} src={require('../../_Logo.png')} />
             <h1 className="title">{t("Title")}</h1>
-            <Button variant="contained" color="secondary" size="large">
-                <Link to="/apps">
+            <Button component={Link} to="/apps"  variant="contained" color="secondary" size="large">
                 {t("Start")}
-                </Link>
             </Button>
             </div>
         </div>

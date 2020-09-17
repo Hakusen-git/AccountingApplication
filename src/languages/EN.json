@@ -10,5 +10,6 @@
     "Type" : "Type",
     "Amount" : "Amount (NZD)",
     "Chart":"Chart",
-    "Doughnut": "Doughnut Stats"
+    "Doughnut": "Doughnut Stats",
+    "Share": "Share this page"
 }

@@ -57,6 +57,8 @@ function App() {
     i18t.changeLanguage('jp')
   }
 
+  
+
 
   return (
     <div className="App" style={{height: '100vh'}}>
