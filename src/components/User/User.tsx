@@ -68,9 +68,7 @@ const User = (props: IUserProps) => {
                 <p style={{color:'#008C76FF'}}>{userName}</p>
 
                 <div 
-                    data-href="https://msa-2020-accounting.azurewebsites.net/" 
-                    data-layout="button" 
-                    data-size="large">
+                    >
                         <a target="_blank" 
                         style={{
                             background:"#3b5998",
@@ -79,7 +77,7 @@ const User = (props: IUserProps) => {
                             padding: '2px 18px 3px 18px',
                             borderRadius:'10px'
                         }}
-                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmsa-2020-accounting.azurewebsites.net%2F&amp;src=sdkpreparse">
+                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmsa-2020-accounting.azurewebsites.net%2F">
                             {t("Share")}
                         </a>
                 </div>
