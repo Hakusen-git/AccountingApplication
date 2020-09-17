@@ -33,7 +33,6 @@ function App() {
 
   const handleAsset = async (input:number) =>{
     setAsset(input)
-    console.log(input)
   } 
   const handleLiability = async (input:number) =>{
     setLiability(input)

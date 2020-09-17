@@ -35,7 +35,6 @@ const User = (props: IUserProps) => {
     const componentClicked = () => console.log('clicked');
 
     const responseFacebook = (response: any) => {
-        console.log(response)
         props.setCustomerID(response.id as string)
         const body:PostCustomer = {
             customerID : response.id as string,
