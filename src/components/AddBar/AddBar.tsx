@@ -111,7 +111,7 @@ const AddBar = (props: id) => {
                             label={t("Amount")}
                             onChange={e => handleAmountChange(e.target.value)}
                             error={error}
-                            helperText={!error ? "" : "Please don't leave it empty :)"}
+                            helperText={!error ? "" : "Please put in digits :)"}
                         />
                     </Grid>
 

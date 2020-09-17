@@ -14,6 +14,7 @@ interface IState{
 }
 
 export default function Account(props: IState) {
+
     
     const {t}= useTranslation();
     
@@ -24,7 +25,7 @@ export default function Account(props: IState) {
 
     return(
         <TableBody>
-            <TableRow hover>
+            <TableRow hover >
                 <TableCell>
                     {props.accountDate}
                 </TableCell>
